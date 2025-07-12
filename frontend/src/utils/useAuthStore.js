@@ -31,7 +31,7 @@ export const useAuthStore = create((set,get) =>({
 
 
 
-    Login: async (email, password, navigate, setError) => {
+    login: async (email, password, navigate, setError) => {
     set({ isLoggingIn: true });
 
     try {

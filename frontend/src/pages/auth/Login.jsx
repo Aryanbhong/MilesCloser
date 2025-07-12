@@ -7,12 +7,12 @@ import loginImg from "../../images/login.jpg"
 import { useAuthStore } from '../../utils/useAuthStore';
 
 
-const login = () => {
+const Login = () => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const Login = useAuthStore((state) => state.Login)
+  const login = useAuthStore((state) => state.Login)
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const login = () => {
    }
 
    setError("");
-  await Login(email, password, navigate, setError);
+  await login(email, password, navigate, setError);
   }
   return (
     <div className='h-screen bg-gradient-to-r from-red-400 to-fuchsia-500 overflow-hidden relative'>
@@ -89,4 +89,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login

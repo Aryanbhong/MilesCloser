@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, useLocation, useNavigate  } from 'react-router-dom'
 import { Router, Route, Routes, Navigate } from 'react-router-dom'
-import Login from './pages/auth/login'
-import SignUp from './pages/auth/signUp'
+import Login from "./pages/auth/Login"
+import SignUp from "./pages/auth/SignUp"
 import Home from './pages/home/Home'
 import "react-day-picker/style.css";
 import HomePage from './pages/home/HomePage'
