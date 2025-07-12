@@ -18,7 +18,7 @@
     "backend": " cd backend && node index.js",
     "dev": "concurrently -n \"frontend,backend\" -c \"bgBlue,bgYellow\" \"npm run frontend\" \"npm run backend\"",
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "dotenv -e backend/.env nodemon backend/index.js"
+     "start": "nodemon backend/index.js"
 
   },
   "devDependencies": {
