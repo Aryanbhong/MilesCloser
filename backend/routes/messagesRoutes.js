@@ -1,6 +1,6 @@
 const {authenticateToken} = require("../utils")
 const {getUsersForSidebar, getMessages, sendMessages} = require("../controlers/messageControlers")
-const {checkAuth} = require("../middleware/authMiddleware")
+const {checkAuth} = require("../controlers/authControler")
 const express = require("express");
 
 
