@@ -6,7 +6,7 @@ import SignUp from "./pages/auth/SignUp"
 import Home from './pages/home/Home'
 import "react-day-picker/style.css";
 import HomePage from './pages/home/HomePage'
-import ProfilePage from './pages/auth/profilePage'
+import ProfilePage from "./pages/auth/ProfilePage"
 import ChatPage from './pages/chat/ChatPage'
 import Layout from './pages/home/layout'
 import Navbar from './Components/Navbar'
