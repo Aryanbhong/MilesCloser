@@ -15,7 +15,7 @@ router.post("/upload-image", async (req, res) => {
 
     res.status(200).json({ imageUrl });
   } catch (error) {
-    console.error("Cloudinary upload failed:", error);
+    // console.error("Cloudinary upload failed:", error);
     res.status(500).json({ error: true, message: error.message });
   }
 });

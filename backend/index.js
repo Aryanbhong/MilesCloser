@@ -16,8 +16,7 @@ const { error, profile } = require("console");
 const cloudinary = require("./lib/cloudinary");
 const { app, server } = require("./lib/socket");
 
-
-
+const rootDir = path.resolve(__dirname, "..");
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -91,14 +90,13 @@ app.post("/create-account", async (req, res) => {
     let imageUrl;
     if (profileFile && profileFile.tempFilePath) {
       try {
-        // ✅ Convert path to absolute format
         const fixedPath = path.resolve(profileFile.tempFilePath);
-        console.log("Fixed temp file path for Cloudinary:", fixedPath);
+        // console.log("Fixed temp file path for Cloudinary:", fixedPath);
 
         const uploadResponse = await uploadImageToCloudinary(fixedPath);
         imageUrl = uploadResponse.secure_url;
       } catch (uploadError) {
-        console.error("Cloudinary upload error:", uploadError);
+        // console.error("Cloudinary upload error:", uploadError);
         return res.status(500).json({
           error: true,
           message: "Failed to upload profile image",
@@ -136,7 +134,7 @@ app.post("/create-account", async (req, res) => {
       message: "Registration Successful",
     });
   } catch (error) {
-    console.error("Error in create-account:", error);
+    // console.error("Error in create-account:", error);
     return res.status(500).json({
       error: true,
       message: "Internal Server Error",
@@ -219,7 +217,7 @@ app.post('/add-note', authenticateToken, async (req, res) => {
     const visitedLocation = JSON.parse(req.body.visitedLocation || "[]");
     const image = req.files?.image;
     const { userId } = req.user;
-     console.log("add note wala data", title,story, visitedDate,sharedWithEmail)
+    //  console.log("add note wala data", title,story, visitedDate,sharedWithEmail)
     if (!title || !story || !visitedDate) {
       return res.status(400).json({
         error: true,
@@ -239,7 +237,7 @@ app.post('/add-note', authenticateToken, async (req, res) => {
     let sharedWith = [];
     if (sharedWithEmail) {
       const sharedUser = await User.findOne({ email: sharedWithEmail });
-      console.log("shared userrr",sharedUser)
+      // console.log("shared userrr",sharedUser)
       if (sharedUser) {
         sharedWith.push(sharedUser._id);
       } else {
@@ -261,14 +259,14 @@ app.post('/add-note', authenticateToken, async (req, res) => {
     });
 
     await dayStory.save();
-     console.log("Saved dayStory:", dayStory);
+    //  console.log("Saved dayStory:", dayStory);
     res.status(200).json({
       story: dayStory,
       message: "Note added successfully"
     });
 
   } catch (error) {
-    console.error("Error in /add-note:", error.message);
+    // console.error("Error in /add-note:", error.message);
     res.status(500).json({
       error: true,
       message: "Server error: " + error.message,
@@ -279,7 +277,7 @@ app.post('/add-note', authenticateToken, async (req, res) => {
 //get all stories 
 app.get("/getall-stories", authenticateToken, async(req, res)=>{
 
-    console.log(" frontend se request ayi hai");
+    // console.log(" frontend se request ayi hai");
   //  try{
     const {userId}= req.user;
    try {
@@ -294,7 +292,7 @@ app.get("/getall-stories", authenticateToken, async(req, res)=>{
     .sort({ isFavourite: -1 });
 
     res.status(200).json({ stories: dailyStories });
-    console.log("dailystories data", dailyStories)
+    // console.log("dailystories data", dailyStories)
   } catch (error) {
     res.status(500).json({
       error: true,
@@ -562,12 +560,12 @@ app.get("/notes/filter", authenticateToken, async (req,res)=>{
   const { userId } = req.user;
 
   try{
-  // convert startdate and enddate from milliseconds to Date objects
+  
   const start = new Date(parseInt(startDate));
   const end = new Date(parseInt(endDate));
 
 
-  //find travel stories that belong to the authenticated user and fall within the date range
+  
   const filteredStories = await DayStory.find({
     userId: userId,
     visitedDate: { $gte: start,
@@ -606,7 +604,10 @@ app.put("/updateProfile",authenticateToken,async(req,res)=>{
   console.log("updated")
 })
 
-
+app.use(express.static(path.join(rootDir,"/frontend/dist")));
+app.get('*',(req,res)=>{
+  res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
+});
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 

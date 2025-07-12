@@ -8,15 +8,21 @@
     "framer-motion": "^12.23.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.525.0",
-    "multer-storage-cloudinary": "^4.0.0"
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemon": "^3.1.10",
+    "vite": "^5.2.10"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "cd frontend && npm run dev",
     "backend": " cd backend && node index.js",
-    "dev": "concurrently -n \"frontend,backend\" -c \"bgBlue,bgYellow\" \"npm run frontend\" \"npm run backend\""
+    "dev": "concurrently -n \"frontend,backend\" -c \"bgBlue,bgYellow\" \"npm run frontend\" \"npm run backend\"",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "dotenv -e backend/.env nodemon backend/index.js"
+
   },
   "devDependencies": {
-    "daisyui": "^5.0.46"
+    "daisyui": "^5.0.46",
+    "dotenv-cli": "^8.0.0"
   }
 }
