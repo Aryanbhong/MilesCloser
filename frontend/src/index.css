@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+.rdp-root {
+    --rdp-accent-color: rgb(238, 120, 195);
+    --rdp-accent-background-color: #dffbff;
+    --rdp-day_button-border-radius: 8px;
+}
+
+.rdp-day--selected {
+    background-color: rgb(238, 120, 195) !important; /* Your accent color */
+    color: rgb(206, 66, 190) !important; /* Change text color */
+    font-weight: bold !important;
+    border-radius: 8px; /* Optional: Make selection rounded */
+}
+
+.rdp-day--range_start {
+    background-color: #ff4081 !important; /* Different color for start */
+}
+
+/* Style the end of the range */
+.rdp-day--range_end {
+    background-color: #ff80ab !important; /* Different color for end */
+}
+
+/* @layer base{
+   
+} */
+
+body{
+    /* background-color: linear-gradient(from-red-400 to-fuchsia-500) ; */
+    background: linear-gradient(to right, #1f1f1f, #2a2a2a);
+    overflow-x: hidden;
+    font-family: sans-serif;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+.scrollbar::-webkit-scrollbar{
+    width: 3px;
+    height: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb{
+    background-color: rgb(236, 94, 118);
+    border-radius: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-track{
+    background-color: pink
+}
+
+.nav-bar {
+    background: rgba(43, 16, 85);
+}
+
+@layer components{
+    .input-box {
+        @apply w-full text-sm bg-pink-600/5 rounded px-5 py-3 mb-4 outline-none;
+    }
+    .main{
+        @apply h-screen bg-gradient-to-r from-red-400 to-fuchsia-500;
+    }
+    .btn-primary {
+        @apply w-full text-sm font-medium text-white bg-pink-500 shadow-lg shadow-pink-200/50 p-[10px] rounded-full my-1 hover:bg-pink-100 hover:text-pink-500;
+    }
+    .btn-light {
+        @apply bg-pink-100 text-pink-500 shadow-pink-100/0 border border-pink-100 hover:bg-pink-500 hover:text-white;
+    }
+    .login-ui-box {
+        @apply w-80 h-[450px] rounded-full bg-pink-600 absolute rotate-45;
+    }
+    .model-box {
+        @apply w-[80vw] md:w-[40%] h-[80vh] bg-white rounded-lg mx-auto mt-14 p-5 overflow-y-scroll  z-50;
+    }
+    .icon-btn {
+        @apply text-[22px] text-slate-300 cursor-pointer hover:text-red-500;
+    }
+}
+
+*{
+  font-family: "Libertinus Math", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

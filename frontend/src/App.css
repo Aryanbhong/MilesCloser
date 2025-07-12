@@ -1,0 +1,22 @@
+.rdp-root {
+    --rdp-accent-color: rgb(238, 120, 195);
+    --rdp-accent-background-color: #dffbff;
+    --rdp-day_button-border-radius: 8px;
+}
+
+.rdp-day--selected {
+    background-color: rgb(238, 120, 195) !; /* Your accent color */
+    color: white ; /* Change text color */
+    font-weight: bold ;
+    border-radius: 8px; /* Optional: Make selection rounded */
+}
+
+/* Style the start of the range */
+.rdp-day--range_start {
+    background-color: #ff4081 ; /* Different color for start */
+}
+
+/* Style the end of the range */
+.rdp-day--range_end {
+    background-color: #ff80ab ; /* Different color for end */
+}
