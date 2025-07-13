@@ -1,4 +1,4 @@
-const { image } = require("framer-motion/client");
+
 const mongoose = require("mongoose");
 
 const messageModal = new mongoose.Schema({
