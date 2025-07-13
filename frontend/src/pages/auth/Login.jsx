@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const login = useAuthStore((state) => state.Login)
+  const login = useAuthStore((state) => state.login)
 
   const navigate = useNavigate();
 
