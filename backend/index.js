@@ -26,7 +26,8 @@ app.use(
 );
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  // origin: "http://localhost:5173",
+  origin: "https://milescloser-14.onrender.com",
   credentials: true, 
 }));
 connectDb();
@@ -331,7 +332,7 @@ try{
         });
     }
       
-    const imageUrl =`http://localhost:8000/uploads/${req.file.filename}`;
+    const imageUrl =`https://milescloser-14.onrender.com/${req.file.filename}`;
 
     res.status(200).json({imageUrl});
 }catch(error){
