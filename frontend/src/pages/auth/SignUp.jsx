@@ -371,9 +371,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-400 to-fuchsia-500 overflow-hidden py-10 px-4">
-      <div className="login-ui-box right-10 -top-40" />
-      <div className="login-ui-box bg-pink-300 -bottom-40 right-1/2" />
+    <div className="min-h-screen bg-gradient-to-r from-red-400 to-fuchsia-500 overflow-hidden py-10 px-4 relative">
+      <div className="login-ui-box right-10 -top-40 absolute z-[-1]" />
+      <div className="login-ui-box bg-pink-300 -bottom-40 right-1/2 absolute z-[-1]" />
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10">
         {/* Left - Image */}

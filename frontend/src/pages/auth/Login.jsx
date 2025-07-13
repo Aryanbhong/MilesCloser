@@ -124,13 +124,13 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-red-400 to-fuchsia-500 overflow-hidden relative py-10 px-4">
+    <div className="min-h-screen  py-10 px-4 h-screen bg-gradient-to-r from-red-400 to-fuchsia-500 overflow-hidden relative">
       {/* UI Decorations */}
-      <div className="login-ui-box right-10 -top-40" />
-      <div className="login-ui-box bg-pink-300 -bottom-40 right-1/2" />
+      <div className="login-ui-box right-10 -top-40 absolute z-[-1]" />
+      <div className="login-ui-box bg-pink-300 -bottom-40 right-1/2 absolute z-[-1] " />
 
       {/* Main Layout */}
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center h-full gap-10">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center h-full gap-10 container  px-20 ">
         {/* Left Section - Image */}
         <div
           className="w-full lg:w-2/4 h-[300px] sm:h-[400px] lg:h-[90vh] bg-cover bg-center rounded-lg p-8 flex items-end shadow-lg"
