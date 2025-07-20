@@ -22,5 +22,12 @@
   "devDependencies": {
     "daisyui": "^5.0.46",
     "dotenv-cli": "^8.0.0"
-  }
+  },
+  "name": "milescloser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
