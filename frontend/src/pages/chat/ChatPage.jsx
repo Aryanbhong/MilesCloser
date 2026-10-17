@@ -44,7 +44,7 @@ const ChatPage = () => {
     <div className="flex h-screen flex-col overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50">
 
       {/* Navbar */}
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Main Chat Area */}
       <main className="flex min-h-0 flex-1 justify-center p-3 pt-4 sm:p-5 lg:p-6">
