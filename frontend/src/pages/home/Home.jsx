@@ -1087,7 +1087,7 @@ const Home = () => {
       <main className="relative z-10 mx-auto w-full max-w-[1600px] px-4 pb-28 pt-7 sm:px-6 sm:pt-10 lg:px-10">
 
         {/* Quick actions and calendar appear first */}
-        <section className="mb-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+        {/* <section className="mb-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-br from-[#28103f] via-[#4c145f] to-[#172c67] p-6 text-white shadow-2xl shadow-fuchsia-950/30 sm:p-8">
             <div className="pointer-events-none absolute -right-12 -top-16 h-56 w-56 rounded-full bg-fuchsia-500/50 blur-[80px]" />
             <div className="pointer-events-none absolute -bottom-20 left-[30%] h-48 w-48 rounded-full bg-orange-500/40 blur-[80px]" />
@@ -1114,10 +1114,10 @@ const Home = () => {
                 Create a memory
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Calendar panel */}
-          <aside className="w-full xl:w-full">
+          {/* <aside className="w-full xl:w-full">
             <div className="overflow-hidden rounded-[2rem] border border-pink-100/80 bg-white/95 shadow-[0_16px_50px_-20px_rgba(217,70,239,0.4)] backdrop-blur-xl">
 
               <div className="border-b border-white/20 bg-gradient-to-r from-pink-100 via-fuchsia-100 to-orange-100 p-5">
@@ -1206,7 +1206,110 @@ const Home = () => {
                 )}
               </div>
             </div>
-          </aside>
+          </aside> */}
+
+       ```jsx
+<aside className="w-full xl:w-full">
+  <div className="relative overflow-hidden rounded-[2rem] border border-fuchsia-400/20 bg-gradient-to-br from-[#21122f] via-[#1b102b] to-[#141020] shadow-[0_16px_50px_-20px_rgba(217,70,239,0.2)] backdrop-blur-xl">
+
+    {/* Ambient neon glows */}
+    <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-fuchsia-500/10 blur-3xl" />
+    <div className="pointer-events-none absolute -bottom-12 -left-12 h-36 w-36 rounded-full bg-blue-500/10 blur-3xl" />
+
+    {/* Header */}
+    <div className="relative border-b border-fuchsia-400/15 bg-gradient-to-r from-fuchsia-500/10 via-purple-500/10 to-blue-500/10 p-5">
+      <div className="flex items-center gap-3">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-gradient-to-br from-fuchsia-500/20 to-blue-500/20 text-fuchsia-300 shadow-[0_0_20px_rgba(217,70,239,0.1)]">
+          <CalendarDays className="h-5 w-5" />
+        </div>
+
+        <div>
+          <h3 className="font-bold text-white">
+            Memory timeline
+          </h3>
+          <p className="mt-0.5 text-xs text-purple-300">
+            Find a special day
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Calendar */}
+    <div className="relative p-2 sm:p-4">
+      <DayPicker
+        mode="range"
+        selected={dateRange}
+        onSelect={handleDayClick}
+        captionLayout="dropdown-buttons"
+        pagedNavigation
+        classNames={{
+          ...defaultClassNames,
+          root: `${defaultClassNames.root} mx-auto w-full p-2 sm:p-3`,
+          months: `${defaultClassNames.months} w-full`,
+          month: `${defaultClassNames.month} w-full`,
+          month_grid: `${defaultClassNames.month_grid} w-full border-collapse`,
+          weekdays: `${defaultClassNames.weekdays} text-xs font-semibold text-fuchsia-300`,
+          weekday: `${defaultClassNames.weekday} py-2`,
+          day: `${defaultClassNames.day} p-0`,
+          day_button: `${defaultClassNames.day_button} h-9 w-9 rounded-xl text-sm text-purple-100 transition-all duration-200 hover:bg-fuchsia-500/15 hover:text-fuchsia-200`,
+          today: `${defaultClassNames.today} font-bold text-cyan-300`,
+          selected: `${defaultClassNames.selected} !bg-gradient-to-br !from-fuchsia-500 !to-purple-600 !text-white rounded-xl shadow-[0_0_12px_rgba(217,70,239,0.25)]`,
+          range_start: `${defaultClassNames.range_start} !rounded-l-xl !bg-fuchsia-500 !text-white`,
+          range_end: `${defaultClassNames.range_end} !rounded-r-xl !bg-blue-500 !text-white`,
+          range_middle: `${defaultClassNames.range_middle} !bg-fuchsia-500/15 !text-fuchsia-200`,
+          nav: `${defaultClassNames.nav} text-fuchsia-300`,
+          button_previous: `${defaultClassNames.button_previous} rounded-xl text-purple-200 transition hover:bg-fuchsia-500/15 hover:text-fuchsia-300`,
+          button_next: `${defaultClassNames.button_next} rounded-xl text-purple-200 transition hover:bg-fuchsia-500/15 hover:text-fuchsia-300`,
+          chevron: `${defaultClassNames.chevron} fill-fuchsia-300`,
+          caption_label: `${defaultClassNames.caption_label} font-bold text-white`,
+          dropdowns: `${defaultClassNames.dropdowns} gap-1`,
+          dropdown: `${defaultClassNames.dropdown} rounded-lg border border-fuchsia-400/20 bg-[#21122f] px-1 py-1 text-sm text-purple-100 outline-none focus:border-fuchsia-400`,
+        }}
+      />
+    </div>
+
+    {/* Footer */}
+    <div className="relative border-t border-fuchsia-400/15 px-5 py-4">
+      <div className="flex items-start gap-2.5">
+        <Heart className="mt-0.5 h-4 w-4 shrink-0 fill-fuchsia-400/50 text-fuchsia-300" />
+        <p className="text-xs leading-5 text-purple-300">
+          Select a start and end date to discover the memories
+          you made during that time.
+        </p>
+      </div>
+
+      {/* Selected date range */}
+      {dateRange.from && (
+        <div className="mt-3 rounded-xl border border-fuchsia-400/15 bg-gradient-to-r from-fuchsia-500/10 to-blue-500/10 px-3 py-2 text-xs font-medium text-fuchsia-200">
+          <span>
+            {moment(dateRange.from).format("MMM D, YYYY")}
+          </span>
+
+          {dateRange.to && (
+            <>
+              <span className="mx-2 text-purple-400">→</span>
+              <span>
+                {moment(dateRange.to).format("MMM D, YYYY")}
+              </span>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Clear filter */}
+      {(filterType === "date" || dateRange.from) && (
+        <button
+          type="button"
+          onClick={resetFilter}
+          className="mt-3 w-full rounded-xl border border-fuchsia-400/20 bg-white/[0.03] px-3 py-2 text-xs font-semibold text-fuchsia-300 transition-all duration-200 hover:border-fuchsia-400/40 hover:bg-fuchsia-500/10 hover:text-fuchsia-200 active:scale-[0.98]"
+        >
+          Clear date filter
+        </button>
+      )}
+    </div>
+  </div>
+</aside>
+```
         </section>
 
         {/* Welcome hero comes after the quick actions and calendar */}
