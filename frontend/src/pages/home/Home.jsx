@@ -1208,7 +1208,7 @@ const Home = () => {
             </div>
           </aside> */}
 
-       ```jsx
+       
 <aside className="w-full xl:w-full">
   <div className="relative overflow-hidden rounded-[2rem] border border-fuchsia-400/20 bg-gradient-to-br from-[#21122f] via-[#1b102b] to-[#141020] shadow-[0_16px_50px_-20px_rgba(217,70,239,0.2)] backdrop-blur-xl">
 
@@ -1309,7 +1309,6 @@ const Home = () => {
     </div>
   </div>
 </aside>
-```
         </section>
 
         {/* Welcome hero comes after the quick actions and calendar */}
