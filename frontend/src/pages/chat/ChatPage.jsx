@@ -91,9 +91,7 @@ const ChatPage = () => {
       <div className="pointer-events-none absolute right-1/3 top-1/3 h-56 w-56 rounded-full bg-orange-500/10 blur-3xl" />
 
       {/* Navbar */}
-      <div className="relative z-10 shrink-0">
-        <Navbar />
-      </div>
+      
 
       {/* Main Chat Area */}
       <main className="relative z-10 flex min-h-0 flex-1 justify-center p-3 pt-4 sm:p-5 lg:p-6">
