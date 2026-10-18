@@ -1,34 +1,3 @@
-// import React from 'react'
-// import { FaMagnifyingGlass } from 'react-icons/fa6'
-// import {IoMdClose} from "react-icons/io"
-
-// const SearchBar = ({value, onChange, handleSearch, onClearSearch}) => {
-//   return (
-//     <div className='w-80 flex items-center text-blue-950 px-4 bg-slate-100 rounded-md'>
-//       <input 
-//       type="text" 
-//       name="" 
-//       id="" 
-//       placeholder='Search Notes'
-//       className='w-full text-xs bg-transparent py-[11px] outline-none'
-//       value={value}
-//       onChange={onChange}
-//       />
-//       {
-//         value && <IoMdClose  className='text-xl text-slate-500 cursor-pointer hover:text-black mr-3' onClick={onClearSearch}/>
-//       }
-
-//     <FaMagnifyingGlass className='text-slate-400 cursor-pointer hover:text-black' onClick={handleSearch} />
-//     </div>
-
-   
-//   )
-// }
-
-// export default SearchBar
-
-
-
 import React from 'react'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
 import { IoMdClose } from 'react-icons/io'
@@ -42,14 +11,14 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
 
   return (
     <div className="group relative w-full sm:w-72 md:w-80">
-      {/* Neon focus glow */}
+ 
       <div className="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-blue-500 opacity-0 blur transition duration-300 group-focus-within:opacity-40" />
 
       <div className="relative flex items-center gap-2 rounded-2xl border border-white/10 bg-[#1c102b]/90 py-1.5 pl-4 pr-2 shadow-lg shadow-black/10 backdrop-blur-xl transition-all duration-300 group-focus-within:border-fuchsia-400/40 group-focus-within:bg-[#241333]">
-        {/* Search icon */}
+        
         <FaMagnifyingGlass className="shrink-0 text-sm text-fuchsia-400" />
 
-        {/* Search input */}
+       
         <input
           type="text"
           name="searchNotes"
@@ -61,7 +30,7 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
           onKeyDown={handleKeyDown}
         />
 
-        {/* Clear search */}
+     
         {value && (
           <button
             type="button"
@@ -73,7 +42,7 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
           </button>
         )}
 
-        {/* Search button */}
+        
         <button
           type="button"
           onClick={handleSearch}
