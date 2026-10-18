@@ -1,61 +1,3 @@
-// import React, { useState } from 'react'
-// import moment from "moment"
-// import { DayPicker, getDefaultClassNames } from "react-day-picker";
-// import { MdClose, MdOutlineDateRange } from 'react-icons/md'
-
-// const DateSelector = ({date, setDate}) => {
-
-//   const defaultClassNames = getDefaultClassNames();
-//   const [openDatePicker, setOpenDatePicker] = useState(false);
-//   return (
-//     <div>
-//      <button className='inline-flex items-center gap-2 text-[13px] font-medium text-pink-600 bg-pink-200/40 hover:bg-pin-200/70 rounded px-2 py-1 cursor-pointer'
-//       onClick={() =>{
-//         setOpenDatePicker(true);
-//      }}>
-//         <MdOutlineDateRange className='text-lg' />
-//         {date
-//             ? moment(date).format("Do MMM YYYY")
-//             : moment().format("Do MMM YYYY")
-//         }
-//      </button>
-
-//     {openDatePicker && (
-//         <div className='overflow-y-scroll p-5 bg-pink-50/80 rounded-lg relative pt-9'>
-//         <button
-//         className='w-10 h-10 rounded-full flex items-center justify-center bg-pink-100 hover:bg-pink-100 absolute top-2 right-2'
-//         onClick={()=>{
-//          setOpenDatePicker(false);
-//         }}
-//         >
-//          <MdClose className='text-xl text-pink-600'/>
-//         </button>
- 
-//         <DayPicker
-//         captionLayout='dropdown-buttons'
-//         mode="single"
-//         selected={date}
-//         onSelect={setDate}
-//         pageNavigation
-//         classNames={{
-//           today: `border-pink-500`, // Add a border to today's date
-//           selected: `bg-pink-500 border-pink-500 text-white rounded-md`, // Highlight the selected day
-//           root: `${defaultClassNames.root} shadow-lg p-5`, // Add a shadow to the root element
-//           chevron: `${defaultClassNames.chevron} fill-amber-500` // Change the color of the chevron
-//         }}
-//         />
-//       </div>
-//     )
-//     }
-//     </div>
-//   )
-// }
-
-
-// export default DateSelector
-
-
-
 
 import React, { useState } from 'react'
 import moment from 'moment'
@@ -81,7 +23,7 @@ const DateSelector = ({ date, setDate }) => {
 
   return (
     <div className="relative inline-block">
-      {/* Date Button */}
+    
       <button
         type="button"
         onClick={() => setOpenDatePicker((prev) => !prev)}
@@ -108,10 +50,10 @@ const DateSelector = ({ date, setDate }) => {
         />
       </button>
 
-      {/* Calendar Panel */}
+  
       {openDatePicker && (
         <>
-          {/* Click outside to close */}
+        
           <button
             type="button"
             aria-label="Close calendar"
@@ -120,7 +62,7 @@ const DateSelector = ({ date, setDate }) => {
           />
 
           <div className="absolute right-0 top-full z-50 mt-3 w-[min(340px,calc(100vw-2rem))] animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden rounded-3xl border border-fuchsia-400/20 bg-[#180e25]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
-            {/* Calendar Header */}
+         
             <div className="relative overflow-hidden border-b border-white/10 bg-gradient-to-r from-[#381443] via-[#29143e] to-[#122849] px-5 py-4 text-white">
               <div className="pointer-events-none absolute -right-5 -top-8 h-24 w-24 rounded-full bg-fuchsia-500/20 blur-2xl" />
               <div className="pointer-events-none absolute -bottom-10 right-16 h-20 w-20 rounded-full bg-blue-500/20 blur-2xl" />
@@ -154,7 +96,7 @@ const DateSelector = ({ date, setDate }) => {
               </div>
             </div>
 
-            {/* Calendar */}
+          
             <div className="overflow-x-auto p-3 sm:p-4">
               <DayPicker
                 captionLayout="dropdown"
@@ -189,7 +131,7 @@ const DateSelector = ({ date, setDate }) => {
               />
             </div>
 
-            {/* Footer */}
+       
             <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#20112f]/80 px-4 py-3">
               <button
                 type="button"
