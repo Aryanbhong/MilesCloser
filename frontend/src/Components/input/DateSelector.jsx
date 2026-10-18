@@ -268,8 +268,8 @@ const DateSelector = ({ date, setDate }) => {
           document.body
         )}
     </div>
-  )
-}
+  );
+};
 
 export default DateSelector
 

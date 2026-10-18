@@ -299,7 +299,6 @@ function HomePage() {
           </div>
         </section>
 
-
         <section className="px-5 py-20 sm:px-8 lg:px-12">
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/25 bg-gradient-to-r from-pink-600 via-fuchsia-600 to-violet-700 px-6 py-14 text-center shadow-2xl shadow-fuchsia-950/30 sm:px-12 sm:py-20">
             <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-orange-400/50 blur-[80px]" />
@@ -326,7 +325,6 @@ function HomePage() {
           </div>
         </section>
 
-
         <footer className="border-t border-white/10 px-5 py-8 sm:px-8 lg:px-12">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
             <Link to="/" className="text-xl font-black">
@@ -348,7 +346,6 @@ function HomePage() {
           </div>
         </footer>
       </div>
-
 
       <style>{`
         @keyframes fadeInUp {

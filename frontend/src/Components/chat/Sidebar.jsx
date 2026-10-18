@@ -180,7 +180,6 @@ const Sidebar = () => {
         )}
       </div>
 
-
       <div className="border-t border-white/5 bg-gradient-to-r from-[#21112f]/80 to-[#111b32]/80 p-3">
         <div className="flex items-center justify-center gap-2 lg:justify-start lg:px-2">
           <Heart className="h-4 w-4 fill-fuchsia-400/30 text-fuchsia-300" />

@@ -154,42 +154,95 @@ export const useAuthStore = create((set,get) =>({
 },
 
 
-connectSocket: () =>{
- const { socket: existingSocket, authUser } = get();
-  if (existingSocket?.connected) return;
+// connectSocket: () =>{
+//  const { socket: existingSocket, authUser } = get();
+//   if (existingSocket?.connected) return;
+
+//   const newSocket = io(BASE_URL, {
+//     withCredentials: true,
+//     query:{
+//       userId: authUser.userId,
+//     }
+//   });
+
+//   newSocket.connect();
+
+//   newSocket.on("connect", () => {
+//     console.log("Connected to socket server:", newSocket.id);
+//   });
+
+//   set({ socket: newSocket });
+  
+//   newSocket.on("getOnlineUsers" ,(userIds)=>{
+//     set({onlineUsers: userIds})
+//   })
+// },
+
+
+
+// disconnectSocket:()=>{
+//    const socket = get().socket;
+//   if (socket?.connected) {
+//     socket.disconnect();
+//     socket.off(); 
+//     console.log("Socket disconnected");
+//   }
+//   set({ socket: null });
+// },
+// }))
+
+
+
+
+connectSocket: () => {
+  const { socket: existingSocket } = get();
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    toast.error("Please log in to connect to chat.");
+    return;
+  }
+
+  if (existingSocket) {
+    if (!existingSocket.connected) {
+      existingSocket.connect();
+    }
+    return;
+  }
+
+  const BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
   const newSocket = io(BASE_URL, {
+    auth: { token },
     withCredentials: true,
-    query:{
-      userId: authUser.userId,
-    }
+    reconnection: true,
+    reconnectionAttempts: 5,
   });
 
-  newSocket.connect();
-
   newSocket.on("connect", () => {
-    console.log("Connected to socket server:", newSocket.id);
+    console.log("Secure socket connected.");
+  });
+
+  newSocket.on("connect_error", (error) => {
+    console.error("Socket connection failed:", error.message);
+  });
+
+  newSocket.on("getOnlineUsers", (userIds) => {
+    set({ onlineUsers: userIds.map(String) });
   });
 
   set({ socket: newSocket });
-  
-  newSocket.on("getOnlineUsers" ,(userIds)=>{
-    set({onlineUsers: userIds})
-  })
 },
 
+disconnectSocket: () => {
+  const socket = get().socket;
 
-
-disconnectSocket:()=>{
-   const socket = get().socket;
-  if (socket?.connected) {
+  if (socket) {
+    socket.removeAllListeners();
     socket.disconnect();
-    socket.off(); 
-    console.log("Socket disconnected");
   }
-  set({ socket: null });
-},
+
+  set({ socket: null, onlineUsers: [] });
+}
 }))
-
-
-

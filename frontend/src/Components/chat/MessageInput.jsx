@@ -81,7 +81,6 @@ const MessageInput = () => {
 
   return (
     <div className="w-full">
-
       {imagePreview && (
         <div className="mb-3 flex items-start gap-3 rounded-2xl border border-fuchsia-400/20 bg-[#1b102b]/95 p-3 shadow-[0_0_25px_rgba(217,70,239,0.08)] backdrop-blur-xl">
           <div className="relative">
@@ -192,4 +191,3 @@ const MessageInput = () => {
 };
 
 export default MessageInput;
-

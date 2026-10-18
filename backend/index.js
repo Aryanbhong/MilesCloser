@@ -26,8 +26,7 @@ app.use(
 );
 
 app.use(cors({
-  // origin: "http://localhost:5173",
-  origin: "https://milescloser-14.onrender.com",
+  origin: "http://localhost:5173",
   credentials: true, 
 }));
 connectDb();
@@ -41,6 +40,8 @@ const uploadRoutes = require('./routes/upload');
 app.use(uploadRoutes);
 const authRoutes =require("./routes/authRoutes");
 app.use("/api/auth",authRoutes)
+const connectionRoutes = require("./routes/connectionRoutes");
+app.use("/api/connections", connectionRoutes);
 
 server.listen(process.env.PORT || 8000, ()=>{
     console.log("server is running on port ",process.env.PORT);
@@ -68,6 +69,83 @@ module.exports= app;
 
 
 
+// app.post("/create-account", async (req, res) => {
+//   try {
+//     const { fullName, email, password } = req.body;
+//     const profileFile = req.files?.profile;
+
+//     if (!fullName || !email || !password) {
+//       return res.status(400).json({
+//         error: true,
+//         message: "All fields are required",
+//       });
+//     }
+
+//     const isUser = await User.findOne({ email });
+//     if (isUser) {
+//       return res.status(400).json({
+//         error: true,
+//         message: "User already exists",
+//       });
+//     }
+
+//     let imageUrl;
+//     if (profileFile && profileFile.tempFilePath) {
+//       try {
+//         const fixedPath = path.resolve(profileFile.tempFilePath);
+//         // console.log("Fixed temp file path for Cloudinary:", fixedPath);
+
+//         const uploadResponse = await uploadImageToCloudinary(fixedPath);
+//         imageUrl = uploadResponse.secure_url;
+//       } catch (uploadError) {
+//         // console.error("Cloudinary upload error:", uploadError);
+//         return res.status(500).json({
+//           error: true,
+//           message: "Failed to upload profile image",
+//         });
+//       }
+//     }
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const user = new User({
+//       fullName,
+//       email,
+//       password: hashedPassword,
+//       profilePic: imageUrl,
+//     });
+
+//     await user.save();
+
+//     const accessToken = jwt.sign(
+//       { userId: user._id },
+//       process.env.JWT_SECRET,
+//       {
+//         expiresIn: "72h",
+//       }
+//     );
+
+//     return res.status(201).json({
+//       error: false,
+//       user: {
+//         fullName: user.fullName,
+//         email: user.email,
+//         profilePic: user.profilePic,
+//       },
+//       accessToken,
+//       message: "Registration Successful",
+//     });
+//   } catch (error) {
+//     // console.error("Error in create-account:", error);
+//     return res.status(500).json({
+//       error: true,
+//       message: "Internal Server Error",
+//     });
+//   }
+// });
+
+
+
 app.post("/create-account", async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -80,8 +158,26 @@ app.post("/create-account", async (req, res) => {
       });
     }
 
-    const isUser = await User.findOne({ email });
-    if (isUser) {
+    if (!profileFile || Array.isArray(profileFile)) {
+      return res.status(400).json({
+        error: true,
+        message: "Please select a profile image",
+      });
+    }
+
+    if (!profileFile.mimetype?.startsWith("image/")) {
+      return res.status(400).json({
+        error: true,
+        message: "Please upload a valid image",
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const existingUser = await User.findOne({
+      email: normalizedEmail,
+    });
+
+    if (existingUser) {
       return res.status(400).json({
         error: true,
         message: "User already exists",
@@ -89,27 +185,41 @@ app.post("/create-account", async (req, res) => {
     }
 
     let imageUrl;
-    if (profileFile && profileFile.tempFilePath) {
-      try {
-        const fixedPath = path.resolve(profileFile.tempFilePath);
-        // console.log("Fixed temp file path for Cloudinary:", fixedPath);
 
-        const uploadResponse = await uploadImageToCloudinary(fixedPath);
-        imageUrl = uploadResponse.secure_url;
-      } catch (uploadError) {
-        // console.error("Cloudinary upload error:", uploadError);
-        return res.status(500).json({
-          error: true,
-          message: "Failed to upload profile image",
-        });
+    try {
+      const uploadPath = profileFile.tempFilePath
+        ? path.resolve(profileFile.tempFilePath)
+        : profileFile.tempFilePath;
+
+      if (!uploadPath) {
+        throw new Error("Uploaded file has no temporary path");
       }
+
+      const uploadResponse =
+        await uploadImageToCloudinary(uploadPath);
+
+      imageUrl = uploadResponse?.secure_url;
+
+      if (!imageUrl) {
+        throw new Error("Cloudinary did not return a secure image URL");
+      }
+    } catch (uploadError) {
+      console.error(
+        "Cloudinary profile upload failed:",
+        uploadError
+      );
+
+      return res.status(500).json({
+        error: true,
+        message: "Failed to upload profile image",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
-      fullName,
-      email,
+      fullName: fullName.trim(),
+      email: normalizedEmail,
       password: hashedPassword,
       profilePic: imageUrl,
     });
@@ -119,14 +229,14 @@ app.post("/create-account", async (req, res) => {
     const accessToken = jwt.sign(
       { userId: user._id },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "72h",
-      }
+      { expiresIn: "72h" }
     );
 
     return res.status(201).json({
       error: false,
       user: {
+        _id: user._id,
+        userId: user._id,
         fullName: user.fullName,
         email: user.email,
         profilePic: user.profilePic,
@@ -135,7 +245,8 @@ app.post("/create-account", async (req, res) => {
       message: "Registration Successful",
     });
   } catch (error) {
-    // console.error("Error in create-account:", error);
+    console.error("Create account failed:", error);
+
     return res.status(500).json({
       error: true,
       message: "Internal Server Error",

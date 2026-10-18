@@ -35,6 +35,16 @@ const ViewNote = ({ storyInfo, onClose, handleDelete, handleEdit }) => {
               A little moment worth keeping ✨
             </p>
           </div>
+
+          {!!storyInfo?.visitedLocation?.length && (
+            <div className="flex max-w-full items-start gap-2 rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-2.5">
+              <GrMapLocation className="mt-0.5 shrink-0 text-base text-cyan-300" />
+
+              <span className="break-words text-xs font-medium leading-5 text-blue-100 sm:text-sm">
+                {storyInfo.visitedLocation.join(', ')}
+              </span>
+            </div>
+          )}
         </div>
 
         <button

@@ -6,12 +6,13 @@ import SignUp from "./pages/auth/SignUp"
 import Home from './pages/home/Home'
 import "react-day-picker/style.css";
 import HomePage from './pages/home/HomePage'
-import ProfilePage from "./pages/auth/ProfilePage"
+import ProfilePage from './pages/auth/profilePage'
 import ChatPage from './pages/chat/ChatPage'
 import Layout from './pages/home/layout'
 import Navbar from './Components/Navbar'
 import { useAuthStore } from './utils/useAuthStore'
 import axiosInstance from './utils/axiosinstance'
+import ScribbleGame from './pages/ScribbleGame'
 
  
 function App() {
@@ -65,7 +66,7 @@ const getUserInfo = async () => {
   <Route path='/home' element={<HomePage />} />
   <Route path='/login' element={<Login />} />
   <Route path='/signUp' element={<SignUp />} />
-
+  <Route path='/scribble' element={<ScribbleGame/>}/>
   
   <Route path='/dashboard' element={
     <PrivateRoute><Home /></PrivateRoute>

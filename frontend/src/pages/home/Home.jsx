@@ -48,7 +48,6 @@ const Home = () => {
     data: null,
   });
 
-
   const getUserInfo = async () => {
     try {
       const response = await axiosInstance.get("/get-user");
@@ -138,14 +137,12 @@ const Home = () => {
     }
   };
 
-
   const handleViewNote = (data) => {
     setOpenViewModal({
       isShown: true,
       data,
     });
   };
-
 
   const onSearchNote = async (query) => {
     try {
@@ -193,7 +190,6 @@ const Home = () => {
     }
   };
 
-
   const handleClearSearch = () => {
     setSearchQuery("");
     setDateRange({ from: null, to: null });
@@ -207,7 +203,6 @@ const Home = () => {
     setSearchQuery("");
     getAllNotes();
   };
-
 
   useEffect(() => {
     getUserInfo();
@@ -482,7 +477,6 @@ const Home = () => {
               ...prevState,
               isShown: false,
             }));
-
             handleEdit(openViewModal.data || null);
           }}
           handleDelete={() =>
