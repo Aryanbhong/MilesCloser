@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useRef, useState } from 'react'
 import { FaRegFileImage } from 'react-icons/fa'
 import {
@@ -83,11 +80,11 @@ const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
           onClick={onChooseFile}
           className="group relative flex h-[240px] w-full flex-col items-center justify-center overflow-hidden rounded-3xl border border-dashed border-fuchsia-400/30 bg-gradient-to-br from-[#21112f] via-[#1b102b] to-[#101b35] p-6 transition-all duration-300 hover:border-fuchsia-400/70 hover:shadow-xl hover:shadow-fuchsia-950/30"
         >
-          {/* Neon ambient glow */}
+  
           <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-fuchsia-500/15 blur-3xl transition-transform duration-500 group-hover:scale-125" />
           <div className="pointer-events-none absolute -bottom-10 -left-8 h-36 w-36 rounded-full bg-blue-500/15 blur-3xl transition-transform duration-500 group-hover:scale-125" />
 
-          {/* Upload icon */}
+        
           <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-gradient-to-br from-fuchsia-500/20 to-blue-500/20 text-fuchsia-300 shadow-lg shadow-fuchsia-950/30 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-3">
             <FaRegFileImage className="text-2xl" />
 
@@ -118,16 +115,14 @@ const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
             />
           )}
 
-          {/* Image overlay */}
+      
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#100819]/90 via-transparent to-[#100819]/25" />
 
-          {/* Memory badge */}
           <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-fuchsia-300/20 bg-[#1b102b]/80 px-3 py-2 text-xs font-semibold text-fuchsia-300 shadow-lg backdrop-blur-xl">
             <MdFavorite className="text-base" />
             Memory photo
           </div>
 
-          {/* Remove image */}
           <button
             type="button"
             onClick={handleRemoveImage}
@@ -137,7 +132,7 @@ const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
             <MdDeleteOutline className="text-xl" />
           </button>
 
-          {/* Bottom image controls */}
+         
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3">
             <div className="min-w-0 rounded-xl border border-white/10 bg-[#1b102b]/85 px-3 py-2 shadow-lg backdrop-blur-xl">
               <p className="truncate text-xs font-semibold text-white">
@@ -160,7 +155,7 @@ const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
         </div>
       )}
 
-      {/* Validation error */}
+    
       {error && (
         <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-rose-400/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-300">
           <span>{error}</span>
