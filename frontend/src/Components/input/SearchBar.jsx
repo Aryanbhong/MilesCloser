@@ -10,7 +10,7 @@ const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
   }
 
   return (
-    <div className="group relative w-full sm:w-72 md:w-80 mr:10">
+    <div className="group relative w-full sm:w-72 md:w-80 mr-40">
  
       <div className="pointer-events-none absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-blue-500 opacity-0 blur transition duration-300 group-focus-within:opacity-40" />
 
