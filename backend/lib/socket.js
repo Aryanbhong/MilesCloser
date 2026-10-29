@@ -144,7 +144,7 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.FRONTEND_URL,
+  "https://milescloser-c0wt.onrender.com",
   "https://milescloser-14.onrender.com",
 ].filter(Boolean);
 
