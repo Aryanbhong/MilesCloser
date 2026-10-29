@@ -2,7 +2,7 @@ import {create} from 'zustand'
 import axiosInstance from './axiosinstance';
 import { toast } from 'react-toastify';
 import { io} from "socket.io-client"
-const BASE_URL ="http://localhost:8000"
+const BASE_URL ="https://milescloser-c0wt.onrender.com"
 
 export const useAuthStore = create((set,get) =>({
     authUser: null,
