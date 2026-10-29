@@ -1,3 +1,260 @@
+// import React, { useEffect, useRef, useState } from 'react'
+// import {FaRegFileImage} from 'react-icons/fa'
+// import {MdDeleteOutline} from "react-icons/md"
+
+// const ImageSelector = ({image, setImage, handleDeleteImg}) => {
+
+//     const inputRef = useRef(null);
+//     const [previewUrl, setPreviewUrl] = useState(null);
+
+//     const handleImageChange=(event)=>{
+//     const file = event.target.files[0];
+//     if(file){
+//       setImage(file);
+//     }
+//     };
+
+//     const onChooseFile = () =>{
+//       inputRef.current.click();
+//     }
+    
+//     const handleRemoveImage=()=>{
+//      setImage(null);
+//      handleDeleteImg()
+//     }
+//     useEffect(()=>{
+//       //if image is a string url 
+//       if(typeof image === 'string'){
+//         setPreviewUrl(image);
+//       }else if(image){
+//         // if the image is as file oobject 
+//         setPreviewUrl(URL.createObjectURL(image));
+//       }else{
+//         //if there is no image 
+//         setPreviewUrl(null);
+//       }
+
+//       return () =>{
+//         if(previewUrl && typeof previewUrl === 'string' && !image){
+//           URL.revokeObjectURL(previewUrl)
+//         }
+//       }
+//     },[image])
+//   return (
+//     <div>
+//       <input 
+//       type="file"
+//       accept='image/*'
+//       ref={inputRef}
+//       onChange={handleImageChange}
+//       className='hidden'
+//       />
+
+//       {!image ?
+//        (<button className='w-full h-[220px] flex flex-col items-center justify-center gap-4 bg-slate-50 rounded border border-slate-200/50' onClick={()=>onChooseFile()}>
+//         <div className='w-14 h-14 flex items-center justify-center bg-pink-50 rounded-full border border-pink-100'>
+//           <FaRegFileImage className="text-xl text-pink-500"/>
+//         </div>
+
+//         <p className='text-sm text-slate-500'>Browse image files to upload</p>
+//       </button>)
+//       :
+//       (<div className='w-full relative'>
+//        <img src={previewUrl} alt='selected' className='w-full h-[300px] object-cover rounded-lg'/>
+
+
+//        <button
+//        className='flex items-center gap-1 text-xs font-medium rounded px-3 py-[3px] bg-rose-50 text-rose-500 shadow-rose-100/0 border border-rose-100 hover:bg-rose-500 hover:text-white absolute top-2 right-2'
+//        onClick={handleRemoveImage}
+//        >
+//         <MdDeleteOutline className="text-lg"/>
+//        </button>
+//       </div>
+//       )}
+//     </div>
+//   )
+// }
+
+// export default ImageSelector
+
+
+
+// import React, { useEffect, useRef, useState } from 'react'
+// import { FaRegFileImage } from 'react-icons/fa'
+// import {
+//   MdDeleteOutline,
+//   MdOutlineCloudUpload,
+//   MdFavorite,
+//   MdClose,
+// } from 'react-icons/md'
+
+// const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
+//   const inputRef = useRef(null)
+//   const [previewUrl, setPreviewUrl] = useState(null)
+//   const [error, setError] = useState('')
+
+//   useEffect(() => {
+//     if (typeof image === 'string') {
+//       setPreviewUrl(image)
+//       return
+//     }
+
+//     if (image instanceof File) {
+//       const objectUrl = URL.createObjectURL(image)
+//       setPreviewUrl(objectUrl)
+
+//       return () => URL.revokeObjectURL(objectUrl)
+//     }
+
+//     setPreviewUrl(null)
+//   }, [image])
+
+//   const handleImageChange = (event) => {
+//     const file = event.target.files?.[0]
+
+//     if (!file) return
+
+//     if (!file.type.startsWith('image/')) {
+//       setError('Please choose a valid image file.')
+//       event.target.value = ''
+//       return
+//     }
+
+//     if (file.size > 5 * 1024 * 1024) {
+//       setError('Image size must be less than 5MB.')
+//       event.target.value = ''
+//       return
+//     }
+
+//     setError('')
+//     setImage(file)
+//   }
+
+//   const onChooseFile = () => {
+//     inputRef.current?.click()
+//   }
+
+//   const handleRemoveImage = () => {
+//     setImage(null)
+//     setError('')
+
+//     if (inputRef.current) {
+//       inputRef.current.value = ''
+//     }
+
+//     handleDeleteImg?.()
+//   }
+
+//   return (
+//     <div className="w-full">
+//       <input
+//         type="file"
+//         accept="image/*"
+//         ref={inputRef}
+//         onChange={handleImageChange}
+//         className="hidden"
+//       />
+
+//       {!image ? (
+//         <button
+//           type="button"
+//           onClick={onChooseFile}
+//           className="group relative flex h-[240px] w-full flex-col items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-pink-200 bg-gradient-to-br from-white via-pink-50 to-purple-50 p-6 transition-all duration-300 hover:border-pink-400 hover:shadow-xl hover:shadow-pink-100/70"
+//         >
+//           {/* Decorative circles */}
+//           <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-pink-200/30 blur-2xl transition-transform duration-500 group-hover:scale-125" />
+//           <div className="pointer-events-none absolute -bottom-10 -left-8 h-32 w-32 rounded-full bg-purple-200/30 blur-2xl transition-transform duration-500 group-hover:scale-125" />
+
+//           <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-purple-400 text-white shadow-lg shadow-pink-200/70 transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-3">
+//             <FaRegFileImage className="text-2xl" />
+
+//             <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-white text-pink-500 shadow-sm">
+//               <MdOutlineCloudUpload className="text-lg" />
+//             </span>
+//           </div>
+
+//           <span className="relative text-base font-bold text-slate-700 transition-colors group-hover:text-pink-600">
+//             Add a memory photo
+//           </span>
+
+//           <span className="relative mt-2 text-center text-sm text-slate-400">
+//             Browse your images and choose a special moment
+//           </span>
+
+//           <span className="relative mt-4 rounded-full border border-pink-100 bg-white/80 px-4 py-1.5 text-xs font-semibold text-pink-500 shadow-sm">
+//             JPG, PNG, WEBP · Max 5MB
+//           </span>
+//         </button>
+//       ) : (
+//         <div className="group relative overflow-hidden rounded-3xl border-4 border-white bg-white shadow-xl shadow-pink-100/70 ring-1 ring-pink-100">
+//           {previewUrl && (
+//             <img
+//               src={previewUrl}
+//               alt="Selected memory"
+//               className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02] sm:h-[300px]"
+//             />
+//           )}
+
+//           {/* Image overlay */}
+//           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-900/10" />
+
+//           <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-white/30 bg-white/85 px-3 py-2 text-xs font-semibold text-pink-600 shadow-md backdrop-blur-md">
+//             <MdFavorite className="text-base" />
+//             Memory photo
+//           </div>
+
+//           <button
+//             type="button"
+//             onClick={handleRemoveImage}
+//             aria-label="Remove selected image"
+//             className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl border border-white/30 bg-white/90 text-rose-500 shadow-md backdrop-blur-md transition-all hover:scale-105 hover:bg-rose-500 hover:text-white"
+//           >
+//             <MdDeleteOutline className="text-xl" />
+//           </button>
+
+//           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3">
+//             <div className="min-w-0 rounded-xl border border-white/20 bg-white/85 px-3 py-2 shadow-md backdrop-blur-md">
+//               <p className="truncate text-xs font-semibold text-slate-700">
+//                 Looking picture-perfect! 
+//               </p>
+//               <p className="text-[10px] text-slate-500">
+//                 Your memory is ready
+//               </p>
+//             </div>
+
+//             <button
+//               type="button"
+//               onClick={onChooseFile}
+//               className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 px-3 py-2.5 text-xs font-semibold text-white shadow-md transition-all hover:scale-105 hover:shadow-lg"
+//             >
+//               <FaRegFileImage />
+//               Change
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {error && (
+//         <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-600">
+//           <span>{error}</span>
+//           <button
+//             type="button"
+//             onClick={() => setError('')}
+//             aria-label="Dismiss error"
+//             className="shrink-0 rounded-full p-1 hover:bg-rose-100"
+//           >
+//             <MdClose className="text-lg" />
+//           </button>
+//         </div>
+//       )}
+//     </div>
+//   )
+// }
+
+// export default ImageSelector
+
+
+
 import React, { useEffect, useRef, useState } from 'react'
 import { FaRegFileImage } from 'react-icons/fa'
 import {
